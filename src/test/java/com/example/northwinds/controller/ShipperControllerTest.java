@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
 
@@ -222,6 +224,17 @@ class ShipperControllerTest {
                 .getContentAsString();
         return objectMapper.readValue(JSON, new TypeReference<>() {
         });
+    }
+
+    public void testGETSpecialShippers_Success() throws Exception {
+
+        ResultActions resultActions = mockMvc.perform(
+                MockMvcRequestBuilders.get("/api/special-shippers")
+        );
+
+        resultActions.andExpect(status().isOk());
+
+
     }
 
 }
