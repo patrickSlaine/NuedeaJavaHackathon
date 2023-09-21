@@ -1,0 +1,7 @@
+FROM mysql:latest
+
+COPY scripts/schema.sql /docker-entrypoint-initdb.d
+
+ENV MYSQL_ROOT_PASSWORD passw0rd
+
+EXPOSE 3306
