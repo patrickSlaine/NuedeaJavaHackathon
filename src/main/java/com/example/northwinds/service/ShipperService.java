@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ShipperService {
@@ -36,5 +37,16 @@ public class ShipperService {
         this.readShipperById(id);
         shipperRepository.deleteById(id);
     }
+
+    public List<Shipper> findSpecialShippersByPhoneNumberPattern(String phoneNumberPattern) {
+        List<Shipper> allShippers = shipperRepository.findAll();
+
+        List<Shipper> specialShippers = allShippers.stream()
+                .filter(shipper -> shipper.getPhone().contains(phoneNumberPattern))
+                .collect(Collectors.toList());
+
+        return specialShippers;
+    }
+
 }
 

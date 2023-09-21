@@ -54,4 +54,20 @@ public class ShipperController {
         }
     }
 
+
+    @GetMapping("/api/special-shippers")
+    public List<Shipper> getSpecialShippers() {
+
+        String specialPhoneNumberPattern = "-9831";
+
+        List<Shipper> specialShippers = shipperService.findSpecialShippersByPhoneNumberPattern(specialPhoneNumberPattern);
+
+        if (specialShippers.isEmpty()) {
+            throw new ResponseStatusException(NOT_FOUND, "No special shippers found");
+        }
+
+        return specialShippers;
+    }
+
+
 }
