@@ -3,7 +3,10 @@ package com.example.northwinds.model;
 import jakarta.persistence.*;
 import org.hibernate.validator.constraints.NotBlank;
 
-@Entity
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity(name="shipper")
 @Table(name="shippers")
 public class Shipper {
 
@@ -17,11 +20,30 @@ public class Shipper {
 
     private String phone;
 
+    @OneToMany(mappedBy = "shipper", cascade = {CascadeType.ALL},orphanRemoval = true)
+    private List<Ship> ships = new ArrayList<>();
+
+    public List<Ship> getShips() {
+        return ships;
+    }
+
+    public void setShips(List<Ship> ships) {
+        this.ships = ships;
+    }
+
+    public Shipper(Long id, String name, String phone,List ships) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.ships = ships;
+    }
+
     public Shipper(Long id, String name, String phone) {
         this.id = id;
         this.name = name;
         this.phone = phone;
     }
+
     public Shipper(){
 
     }

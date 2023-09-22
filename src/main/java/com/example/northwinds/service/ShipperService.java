@@ -6,6 +6,7 @@ import com.example.northwinds.repository.ShipperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,7 +16,7 @@ public class ShipperService {
     private ShipperRepository shipperRepository;
 
     public List<Shipper> readAllShippers(){
-        return shipperRepository.findAll();
+        return (ArrayList)shipperRepository.findAll();
     }
 
     public Shipper readShipperById(Long id){
